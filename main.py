@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+3D Cube Control using Hand Gestures.
+Uses MediaPipe for hand tracking and OpenGL for 3D rendering.
+"""
+"""
 Real-Time 3D Object Manipulation with Hand Gestures
 Using MediaPipe new API (0.10.30+)
 
