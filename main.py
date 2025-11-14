@@ -44,7 +44,7 @@ class Config:
     RENDER_HEIGHT = 600
     ROTATION_SENSITIVITY = 0.3
     ZOOM_SENSITIVITY = 0.015
-    SMOOTHING_FACTOR = 0.4
+    smoothing_factor_size = 0.4
     ZOOM_MIN = -15.0
     ZOOM_MAX = -2.0
     ZOOM_DEFAULT = -6.0
@@ -268,7 +268,7 @@ class GestureController:
 
         if self.prev_palm is not None and self.stable_frames > 2:
             delta = palm - self.prev_palm
-            alpha = Config.SMOOTHING_FACTOR
+            alpha = Config.smoothing_factor_size
 
             self.smooth_dx = alpha * delta[0] + (1 - alpha) * self.smooth_dx
             self.smooth_dy = alpha * delta[1] + (1 - alpha) * self.smooth_dy
