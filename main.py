@@ -42,7 +42,7 @@ class Config:
     WEBCAM_HEIGHT = 480
     RENDER_WIDTH = 800
     RENDER_HEIGHT = 600
-    ROTATION_SENSITIVITY = 0.3
+    ROTATION_SENSITIVITY = 0.3  # degrees per frame
     ZOOM_SENSITIVITY = 0.015
     smoothing_factor_size = 0.4
     ZOOM_MIN = -15.0
