@@ -638,6 +638,7 @@ class App:
 # =============================================================================
 
 if __name__ == "__main__":
+    print("[INFO] Starting 3D Cube Control... Press 'q' to quit.")
     try:
         app = App()
         app.run()
