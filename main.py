@@ -266,6 +266,7 @@ class GestureController:
         palm = hand_tracker.get_palm_center(landmarks)
         pinch = hand_tracker.get_pinch_distance(landmarks)
 
+        # Detect open hand (rotate) and pinch (zoom) gestures
         if self.prev_palm is not None and self.stable_frames > 2:
             delta = palm - self.prev_palm
             alpha = Config.smoothing_factor_size
