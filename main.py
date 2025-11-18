@@ -98,6 +98,7 @@ class HandTracker:
         self.frame_height = Config.WEBCAM_HEIGHT
 
         # Create hand landmarker with VIDEO mode
+        # Initialize MediaPipe hand landmarker with real-time detection mode
         base_options = mp_python.BaseOptions(model_asset_path=model_path)
         options = vision.HandLandmarkerOptions(
             base_options=base_options,
