@@ -77,6 +77,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+> **Note:** Ensure your webcam is connected and accessible before running the application.
+
 ### 4. Run the Application
 
 ```bash
