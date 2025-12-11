@@ -181,14 +181,14 @@ class HandTracker:
             y1 = int(hand_landmarks[start].y * h)
             x2 = int(hand_landmarks[end].x * w)
             y2 = int(hand_landmarks[end].y * h)
-            cv2.line(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.line(frame, (x1, y1), (x2, y2), (0, 230, 210), 2)
 
         # Draw landmarks
         for lm in hand_landmarks:
             x = int(lm.x * w)
             y = int(lm.y * h)
-            cv2.circle(frame, (x, y), 5, (255, 0, 0), -1)
-            cv2.circle(frame, (x, y), 7, (0, 255, 0), 2)
+            cv2.circle(frame, (x, y), 5, (255, 40, 180), -1)
+            cv2.circle(frame, (x, y), 7, (0, 230, 210), 2)
 
     def get_palm_center(self, landmarks):
         """Calculate palm center from key landmarks"""
@@ -325,7 +325,7 @@ class Renderer3D:
         self.idle_rotation = 0.0
 
         pygame.init()
-        pygame.display.set_caption("Hand Gesture 3D Control")
+        pygame.display.set_caption("3dCubeControl — Hand Gesture")
 
         self.screen = pygame.display.set_mode(
             (Config.RENDER_WIDTH, Config.RENDER_HEIGHT), DOUBLEBUF | OPENGL
@@ -344,14 +344,14 @@ class Renderer3D:
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
         glLightfv(GL_LIGHT0, GL_POSITION, [5, 5, 5, 1])
-        glLightfv(GL_LIGHT0, GL_AMBIENT, [0.2, 0.2, 0.2, 1])
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.8, 0.8, 0.8, 1])
+        glLightfv(GL_LIGHT0, GL_AMBIENT, [0.1, 0.1, 0.2, 1])
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, [1.0, 1.0, 1.0, 1])
 
         glLightfv(GL_LIGHT1, GL_POSITION, [-3, 2, -3, 1])
-        glLightfv(GL_LIGHT1, GL_DIFFUSE, [0.3, 0.3, 0.4, 1])
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, [0.2, 0.1, 0.4, 1])
 
         glShadeModel(GL_SMOOTH)
-        glClearColor(0.15, 0.15, 0.18, 1.0)
+        glClearColor(0.04, 0.04, 0.10, 1.0)
 
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -364,32 +364,32 @@ class Renderer3D:
         faces = [
             (
                 [0, 0, 1],
-                [0.9, 0.2, 0.2],
+                [1.0, 0.08, 0.08],
                 [[-s, -s, s], [s, -s, s], [s, s, s], [-s, s, s]],
             ),
             (
                 [0, 0, -1],
-                [0.2, 0.9, 0.2],
+                [0.0, 1.0, 0.3],
                 [[s, -s, -s], [-s, -s, -s], [-s, s, -s], [s, s, -s]],
             ),
             (
                 [0, 1, 0],
-                [0.2, 0.4, 0.9],
+                [0.0, 0.5, 1.0],
                 [[-s, s, s], [s, s, s], [s, s, -s], [-s, s, -s]],
             ),
             (
                 [0, -1, 0],
-                [0.9, 0.9, 0.2],
+                [1.0, 0.95, 0.0],
                 [[-s, -s, -s], [s, -s, -s], [s, -s, s], [-s, -s, s]],
             ),
             (
                 [1, 0, 0],
-                [0.9, 0.2, 0.9],
+                [0.8, 0.0, 1.0],
                 [[s, -s, s], [s, -s, -s], [s, s, -s], [s, s, s]],
             ),
             (
                 [-1, 0, 0],
-                [0.2, 0.9, 0.9],
+                [0.0, 1.0, 0.9],
                 [[-s, -s, -s], [-s, -s, s], [-s, s, s], [-s, s, -s]],
             ),
         ]
@@ -403,8 +403,8 @@ class Renderer3D:
         glEnd()
 
         glDisable(GL_LIGHTING)
-        glColor3f(0, 0, 0)
-        glLineWidth(2)
+        glColor3f(0.95, 0.95, 0.95)
+        glLineWidth(2.5)
 
         edges = [
             ((-s, -s, -s), (s, -s, -s)),
@@ -431,7 +431,7 @@ class Renderer3D:
 
     def draw_grid(self):
         glDisable(GL_LIGHTING)
-        glColor3f(0.3, 0.3, 0.3)
+        glColor3f(0.08, 0.18, 0.38)
         glLineWidth(1)
 
         size, divisions = 10, 10
@@ -536,9 +536,9 @@ class App:
         cv2.addWeighted(overlay, 0.5, frame, 0.5, 0, frame)
 
         if self.gesture.is_active:
-            status, color = "ACTIVE - Move hand", (0, 255, 0)
+            status, color = "ACTIVE - Move hand", (0, 255, 120)
         else:
-            status, color = "PAUSED - Show open hand", (0, 0, 255)
+            status, color = "PAUSED - Show open hand", (0, 140, 255)
 
         cv2.putText(frame, status, (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
         cv2.putText(
